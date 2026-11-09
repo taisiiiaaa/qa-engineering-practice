@@ -13,6 +13,13 @@ class ProductDetailsPage {
     return Number(await $('[data-test="cart-quantity"]').getText())
   }
 
+  async waitForCartBadgeCount(expectedCount) {
+    await browser.waitUntil(
+      async () => (await this.getCartBadgeCount()) === expectedCount,
+      { timeout: 5000, timeoutMsg: "Cart badge did not update" },
+    )
+  }
+
   get errorContainer() {
     return $("#toast-container")
   }

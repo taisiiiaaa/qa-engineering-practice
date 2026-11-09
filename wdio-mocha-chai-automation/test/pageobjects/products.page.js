@@ -18,6 +18,14 @@ class ProductsPage {
     return $$('h5[data-test="product-name"]')
   }
 
+  get noProductsMessage() {
+    return $('[data-test="no-results"]')
+  }
+
+  async isNoProductsMessageDisplayed() {
+    return await this.noProductsMessage.isDisplayed()
+  }
+
   async getProductNames() {
     await browser.waitUntil(
       async () => {

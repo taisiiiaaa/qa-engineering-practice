@@ -9,8 +9,10 @@ describe("Filtering products by sustainability and price", () => {
     await ProductsPage.selectEcoFriendly()
     await ProductsPage.selectPriceRange(1, 10)
 
-    const products = await ProductsPage.getProductNames()
-
-    products.should.have.lengthOf(0)
+    await ProductsPage.noProductsMessage.waitForDisplayed({
+      timeout: 5000,
+      timeoutMsg: "No products found message was not displayed",
+    })
+    ;(await ProductsPage.isNoProductsMessageDisplayed()).should.be.true
   })
 })
