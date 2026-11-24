@@ -1,0 +1,13 @@
+{
+  "name": "restful-booker-api-tests",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test src/tests/booking.test.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^18.0.10"
+  }
+}
