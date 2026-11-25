@@ -19,6 +19,23 @@ allure-report/
 wdio-report/
 wdio-logs/
 
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Cypress generated files
+cypress/screenshots/
+cypress/videos/
+
+# Test results and reports
+cypress/results/
+cypress/reports/
+mochawesome-report/
+
 # Test reports and results
 test-results/
 reports/
@@ -46,3 +63,4 @@ temp/
 
 # TypeScript
 *.tsbuildinfo
+
