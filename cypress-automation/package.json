@@ -4,13 +4,22 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "test": "cypress run",
-    "cy:open": "cypress open"
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "precy:run": "npm run cy:clean",
+    "cy:clean": "rimraf cypress/results cypress/reports",
+    "cy:merge": "mochawesome-merge \"cypress/results/*.json\" -o cypress/results/merged.json",
+    "cy:generate": "marge cypress/results/merged.json --reportDir cypress/reports --reportFilename index --reportTitle \"Cypress Automation Report\"",
+    "cy:report": "npm run cy:merge && npm run cy:generate"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^15.10.0",
-    "cypress-real-events": "^1.15.1"
+    "cypress-real-events": "^1.15.1",
+    "mochawesome": "^8.1.1",
+    "mochawesome-merge": "^5.1.1",
+    "mochawesome-report-generator": "^6.3.2",
+    "rimraf": "^6.1.4"
   }
 }
