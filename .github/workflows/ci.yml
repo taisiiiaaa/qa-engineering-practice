@@ -1,0 +1,68 @@
+name: Playwright CI
+
+on:
+  push:
+    branches: [automation-tools]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: ESLint and Prettier
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: playwright-automation
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: playwright-automation/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Check Prettier formatting
+        run: npm run format:check
+
+  ui-tests:
+    name: Playwright UI Tests
+    needs: lint
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: playwright-automation
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: playwright-automation/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Run UI tests
+        run: npm test
