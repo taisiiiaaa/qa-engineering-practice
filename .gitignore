@@ -21,6 +21,7 @@ allure-report/
 wdio-report/
 wdio-logs/
 
+
 # Playwright
 node_modules/
 /test-results/
