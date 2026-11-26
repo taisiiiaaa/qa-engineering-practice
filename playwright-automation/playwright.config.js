@@ -1,7 +1,7 @@
-import { defineConfig, devices } from "@playwright/test"
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
-  testDir: "./tests",
+  testDir: './tests',
 
   fullyParallel: true,
 
@@ -11,21 +11,24 @@ export default defineConfig({
 
   workers: 2,
 
-  reporter: "html",
+  reporter: [
+    ['list', { printSteps: true }],
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+  ],
 
   use: {
-    baseURL: "https://practicesoftwaretesting.com/",
+    baseURL: 'https://practicesoftwaretesting.com/',
 
     headless: true,
 
-    trace: "on-first-retry",
+    trace: 'on-first-retry',
   },
 
   projects: [
-    { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
 
-    { name: "firefox", use: { ...devices["Desktop Firefox"] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
 
-    { name: "webkit", use: { ...devices["Desktop Safari"] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
-})
+});
